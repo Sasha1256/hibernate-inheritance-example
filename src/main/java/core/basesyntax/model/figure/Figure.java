@@ -3,7 +3,6 @@ package core.basesyntax.model.figure;
 import jakarta.persistence.*;
 
 @MappedSuperclass
-@Table(name = "figures")
 public class Figure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
