@@ -26,7 +26,7 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
             return animal;
         } catch (Exception exception) {
             if (transaction != null) {
-                transaction.commit();
+                transaction.rollback();
             }
             throw new HibernateException("Can't save Animal", exception);
         } finally {
@@ -40,7 +40,7 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
     public List<Animal> findByNameFirstLetter(Character character) {
         try (Session session = sessionFactory.openSession()) {
             String className = Character.class.getName();
-            return session.createQuery("from" + className + "where firstLetter = : character")
+            return session.createQuery("from " + className + " a where a.name = : character")
                     .setParameter("firstLetter", character).getResultList();
         } catch (Exception exception) {
             throw new HibernateException("Can't find Animal", exception);

@@ -15,7 +15,7 @@ public class CoachDaoImpl extends PersonDaoImpl implements CoachDao {
     @Override
     public List<Coach> findByExperienceGreaterThan(int years) {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from Coach where experience = :years")
+            return session.createQuery("from Coach where experience > :years")
                     .setParameter("years", years).getResultList();
         } catch (Exception exception) {
             throw new HibernateException("Cannot find Mentor", exception);
